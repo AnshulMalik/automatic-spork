@@ -13,6 +13,9 @@
   "devDependencies": {
     "jshint": "^2.9.4"
   },
+  "engines": {
+    "node": "6.8.0"
+  },
   "scripts": {
     "test": "./node_modules/jshint/bin/jshint app.js",
     "start": "node ./bin/www"
