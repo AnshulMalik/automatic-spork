@@ -1,0 +1,22 @@
+{
+  "name": "anshulgitbot",
+  "version": "1.0.0",
+  "description": "The is a bot to automatically merge pull requests which passes all test",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.11",
+    "request": "^2.76.0",
+    "request-promise": "^4.1.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint app.js",
+    "start": "node ./bin/www"
+  },
+  "author": "",
+  "license": "ISC"
+}
