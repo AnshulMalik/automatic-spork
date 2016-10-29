@@ -1,27 +1,27 @@
 /* jshint esversion:6 */
-var util = require('util');
-var urlLib = require('url');
-var requestPromise = require('request-promise');
+var util = require("util");
+var urlLib = require("url");
+var requestPromise = require("request-promise");
 function wrapper(token) {
 
   return function merge(repo, sha, message) {
-    let url = urlLib.resolve('https://api.github.com/repos/',repo.full_name+'/merges');
+    let url = urlLib.resolve("https://api.github.com/repos/" + repo.full_name + "/merges");
     requestPromise({
-        method: 'POST',
+        method: "POST",
         uri: url.toString(),
         body: {
-          'base': 'master',
-          'head': sha,
-          'commit_message': message
+          "base": "master",
+          "head": sha,
+          "commit_message": message
         },
         json: true,
         headers: {
-          'User-Agent': 'Bot',
-          'Authorization': 'token ' + token
+          "User-Agent": "Bot",
+          "Authorization": "token " + token
         },
         resolveWithFullResponse: true
     }).then((response) => {
-      json = response.toJSON();
+      let json = response.toJSON();
       switch(json.statusCode) {
         case 204:
           console.error("No content to display, something went wrong");

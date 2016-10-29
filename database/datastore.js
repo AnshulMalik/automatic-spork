@@ -1,16 +1,9 @@
 /* jshint esversion:6 */
-var DBClient = require('./db');
-
-var DataStore = {
-  pullRequestClosed: closed,
-  pullRequestEdited: edited,
-  pullRequestLabeled: labeled,
-  pullRequestOpen: opened,
-};
+var DBClient = require("./db");
 
 function closed(prID) {
   return new Promise((resolve, reject) => {
-    DBClient.db.collection('open').delete({
+    DBClient.db.collection("open").delete({
       id: prID
     }, (err, result) => {
       if(err)
@@ -24,7 +17,7 @@ function closed(prID) {
 function edited(pr) {
   return new Promise((resolve, reject) => {
 
-    DBClient.db.collection('open').update({id: pr.id}, pr, (err, result) => {
+    DBClient.db.collection("open").update({id: pr.id}, pr, (err, result) => {
       if(err)
         reject("Something went wrong with the database");
       else
@@ -35,9 +28,9 @@ function edited(pr) {
 
 function labeled(prID, label) {
   return new Promise((resolve, reject) => {
-    DBClient.db.collection('label').insertOne({
-      prID: prID,
-      label: label
+    DBClient.db.collection("label").insertOne({
+      prID,
+      label
     }, (err, result) => {
       if(err)
         reject("Something went wrong with the database");
@@ -49,7 +42,7 @@ function labeled(prID, label) {
 
 function opened(pr) {
   return new Promise((resolve, reject) => {
-    DBClient.db.collection('open').insertOne(pr, (err , result) => {
+    DBClient.db.collection("open").insertOne(pr, (err , result) => {
       if(err) {
         reject("Something went wrong with the database");
       }
@@ -60,4 +53,9 @@ function opened(pr) {
   });
 }
 
-module.exports = DataStore;
+module.exports = {
+  pullRequestClosed: closed,
+  pullRequestEdited: edited,
+  pullRequestLabeled: labeled,
+  pullRequestOpen: opened,
+};

@@ -1,4 +1,4 @@
-# automatic-spork [![Build Status](https://travis-ci.org/AnshulMalik/automatic-spork.svg?branch=master)](https://travis-ci.org/AnshulMalik/automatic-spork)
+# automatic-spork [![Build Status](https://travis-ci.org/AnshulMalik/automatic-spork.svg?branch=master)](https://travis-ci.org/AnshulMalik/automatic-spork) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/073b37e56a624b748369777c97ddfcd7)](https://www.codacy.com/app/malikanshul29/automatic-spork?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AnshulMalik/automatic-spork&amp;utm_campaign=Badge_Grade)
 Automated git bot, tests the PRs and merges them to master.
 
 Steps to install:

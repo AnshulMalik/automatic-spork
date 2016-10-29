@@ -1,25 +1,27 @@
 /* jshint esversion:6 */
-var app = require('express')();
-var bodyParser = require('body-parser');
-var util = require('util');
-var fs = require('fs');
-var DataStore = require('./database/datastore');
+var app = require("express")();
+var bodyParser = require("body-parser");
+var util = require("util");
+var fs = require("fs");
+var DataStore = require("./database/datastore");
 
-var merge = require('./merge')(process.env.GITHUB_TOKEN);
+var merge = require("./merge")(process.env.GITHUB_TOKEN);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function(req, res) {
+app.get("/", function(req, res) {
   res.write("<center>Bot is running</center>");
   res.end();
 });
 
-app.post('/', function(req, res) {
+app.post("/", function(req, res) {
   // If request came from github
-  if(req.body.action) {
-    switch(req.body.action) {
-      case 'opened':
+  //
+  let action = req.body.action;
+  if(action) {
+    switch(action) {
+      case "opened":
         DataStore.pullRequestOpen(req.body.pull_request)
           .then((result) => {
             console.log(result);
@@ -27,11 +29,11 @@ app.post('/', function(req, res) {
             console.error(err);
           });
         break;
-      case 'assigned':
+      case "assigned":
         break;
-      case 'unassigned':
+      case "unassigned":
         break;
-      case 'labeled':
+      case "labeled":
         DataStore.pullRequestLabeled(req.body.pull_request.id, req.body.label.name)
           .then((result) => {
             console.log(result);
@@ -39,10 +41,10 @@ app.post('/', function(req, res) {
             console.log(err);
           });
         break;
-      case 'unlabeled':
+      case "unlabeled":
         break;
-      case 'edited':
-        if(req.body.pull_request.status == 'open') {
+      case "edited":
+        if(req.body.pull_request.status == "open") {
           DataStore.pullRequestEdited(req.body.pull_request)
             .then((result) => {
               console.log(result);
@@ -51,9 +53,9 @@ app.post('/', function(req, res) {
             });
         }
         break;
-      case 'reopened':
+      case "reopened":
         break;
-      case 'closed':
+      case "closed":
       DataStore.pullRequestClosed(req.body.pull_request.id)
         .then((result) => {
           console.log(result);
@@ -68,16 +70,16 @@ app.post('/', function(req, res) {
   if(req.body.state) {
     // If travis ci build is currently running
     switch(req.body.state) {
-      case 'pending':
+      case "pending":
         console.log("Build is pending.", req.body.id);
         break;
-      case 'success':
+      case "success":
         // merge the commit to master branch
         console.log("Build " + req.body.id + " succeeded, now merging....");
         let commit = req.body.commit;
         merge(req.body.repository, commit.sha, commit.commit.message);
         break;
-      case 'failure':
+      case "failure":
         console.log("Build is failed.", req.body.id);
         break;
       default:
