@@ -7,8 +7,8 @@ var DataStore = require('./database/datastore');
 
 var merge = require('./merge')(process.env.GITHUB_TOKEN);
 
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
   res.write("<center>Bot is running</center>");
@@ -82,7 +82,7 @@ app.post('/', function(req, res) {
         break;
       default:
         // Do appropriate action
-        console.log("Invalid state received : {0}", req.body.state);
+        console.log("Invalid state received : ", req.body.state);
     }
   }
   res.end("Thanks");
