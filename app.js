@@ -44,7 +44,7 @@ app.post("/", function(req, res) {
       case "unlabeled":
         break;
       case "edited":
-        if(req.body.pull_request.status == "open") {
+        if(req.body.pull_request.status === "open") {
           DataStore.pullRequestEdited(req.body.pull_request)
             .then((result) => {
               console.log(result);

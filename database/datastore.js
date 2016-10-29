@@ -6,10 +6,12 @@ function closed(prID) {
     DBClient.db.collection("open").delete({
       id: prID
     }, (err, result) => {
-      if(err)
+      if(err) {
         reject("Something went wrong with the database");
-      else
+      }
+      else {
         resolve("Successfully closed");
+      }
     });
   });
 }
@@ -18,10 +20,12 @@ function edited(pr) {
   return new Promise((resolve, reject) => {
 
     DBClient.db.collection("open").update({id: pr.id}, pr, (err, result) => {
-      if(err)
+      if(err) {
         reject("Something went wrong with the database");
-      else
+      }
+      else {
         resolve("Successfully edited the pull request");
+      }
     });
   });
 }
@@ -32,10 +36,12 @@ function labeled(prID, label) {
       prID,
       label
     }, (err, result) => {
-      if(err)
+      if(err) {
         reject("Something went wrong with the database");
-      else
+      }
+      else {
         resolve("Label applied successfully");
+      }
     });
   });
 }
