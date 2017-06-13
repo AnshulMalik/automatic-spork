@@ -1,0 +1,29 @@
+{
+  "name": "automatic-spork",
+  "scripts": {
+  },
+  "env": {
+    "GITHUB_TOKEN": {
+      "required": true
+    },
+    "MONGO_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
